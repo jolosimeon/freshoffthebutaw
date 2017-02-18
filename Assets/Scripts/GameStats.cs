@@ -6,6 +6,8 @@ public static class GameStats {
 	private static int lastComplete, progress, currentLevel, lives, score;
 	private static bool hasPassed;
 	private static int[] levels = { 3, 4, 5, 6 };
+    private static string[] bio = { "apple", "banana" };
+    private static string[] nonbio = { "plasticbag", "chips", "bottle", "can" };
 
 	public static int LastComplete 
 	{
@@ -90,4 +92,29 @@ public static class GameStats {
 			score = value;
 		}
 	}
+
+
+    public static string[] Bio
+    {
+        get
+        {
+            return bio;
+        }
+        set
+        {
+            bio = value;
+        }
+    }
+
+    public static string[] Nonbio
+    {
+        get
+        {
+            return nonbio;
+        }
+        set
+        {
+            nonbio = value;
+        }
+    }
 }
