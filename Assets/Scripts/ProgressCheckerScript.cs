@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ProgressCheckerScript : MonoBehaviour {
-
+    float timeLeft = 3.0f;
     Text score;
 	// Use this for initialization
 	void Start () {
@@ -24,8 +24,7 @@ public class ProgressCheckerScript : MonoBehaviour {
         }
         Debug.Log(GameStats.Lives);
 
-		if (GameStats.Lives < 0)
-			SceneManager.LoadScene ("GameOverScreen", LoadSceneMode.Single);
+		
 	}
 	
 	// Update is called once per frame
@@ -33,16 +32,23 @@ public class ProgressCheckerScript : MonoBehaviour {
 
 		if (Input.GetMouseButtonUp (0))
 			Debug.Log ("HLLOE");
+        timeLeft -= Time.deltaTime;
 
-		if (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) {
-			GameStats.HasPassed = false;
-			System.Random rand = new System.Random ();
-			int nextLevel = GameStats.Levels [rand.Next (0, GameStats.Levels.Length)];
-			while (nextLevel == GameStats.CurrentLevel)
-				nextLevel = GameStats.Levels [rand.Next (0, GameStats.Levels.Length)];
-			SceneManager.LoadScene (nextLevel);
-			//SceneManager.LoadScene ("ProgressScreen", LoadSceneMode.Single);
-		}
+        if (timeLeft < 0)
+        {
+            if (GameStats.Lives <= 0)
+                SceneManager.LoadScene("GameOverScreen", LoadSceneMode.Single);
+            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+            {
+                GameStats.HasPassed = false;
+                System.Random rand = new System.Random();
+                int nextLevel = GameStats.Levels[rand.Next(0, GameStats.Levels.Length)];
+                while (nextLevel == GameStats.CurrentLevel)
+                    nextLevel = GameStats.Levels[rand.Next(0, GameStats.Levels.Length)];
+                SceneManager.LoadScene(nextLevel);
+                //SceneManager.LoadScene ("ProgressScreen", LoadSceneMode.Single);
+            }
+        }
 	
 	}
 }

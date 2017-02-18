@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class GameOverTouchDetector : MonoBehaviour {
+public class GameOverTouchDetectorScript : MonoBehaviour {
 
 	Ray ray;
 	RaycastHit hit;
-	// Use this for initialization
-	void Start () {
-	
-	}
+    Text score;
+    // Use this for initialization
+
+
+    
+    void Start () {
+        score = GameObject.Find("Score").GetComponent<Text>();
+        score.text = "" + GameStats.Score;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,10 +28,10 @@ public class GameOverTouchDetector : MonoBehaviour {
 				// create and if collided with something
 				if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
 
-					if (hit.collider.tag == "backbtn")
+					if (hit.collider.gameObject.tag == "backbtn")
 						SceneManager.LoadScene ("HomeScreen", LoadSceneMode.Single);
 
-					if (hit.collider.tag == "againbtn") {
+					if (hit.collider.gameObject.tag == "againbtn") {
 						GameStats.CurrentLevel = 0;
 						GameStats.Progress = 0;
 						GameStats.LastComplete = 0;

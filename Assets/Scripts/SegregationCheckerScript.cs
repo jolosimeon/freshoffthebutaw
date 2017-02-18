@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SegregationCheckerScript : MonoBehaviour {
 
-	float timeLeft = 5.0f;
+	float timeLeft = 10.0f;
     bool moveToPlace = false;
     int items = 4;
 	public Text test;
@@ -15,6 +15,11 @@ public class SegregationCheckerScript : MonoBehaviour {
     Sprite[] nonBioSprites;
     Ray ray;
     RaycastHit hit;
+    public float barDisplay; //current progress
+    public Vector2 pos = new Vector2(20, 40);
+    public Vector2 size = new Vector2(60, 20);
+    public Texture2D emptyTex;
+    public Texture2D fullTex;
 
     // Use this for initialization
     void Start () {
@@ -55,7 +60,20 @@ public class SegregationCheckerScript : MonoBehaviour {
         objects[2].GetComponent<SpriteRenderer>().sprite = sprites[num];
     }
 
- 
+    void OnGUI()
+    {
+        //draw the background:
+        GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
+        GUI.Box(new Rect(0, 0, size.x, size.y), emptyTex);
+
+        //draw the filled-in part:
+        GUI.BeginGroup(new Rect(0, 0, size.x * barDisplay, size.y));
+        GUI.Box(new Rect(0, 0, size.x, size.y), fullTex);
+        GUI.EndGroup();
+        GUI.EndGroup();
+    }
+
+
     /*for extensible in the future HAHAHAHA :((((((((((((((((((*/
     void moveObjects() {
         Vector3 vector = new Vector3((float) -2.48, 0, 0);
@@ -77,7 +95,8 @@ public class SegregationCheckerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		timeLeft -= Time.deltaTime;
+        barDisplay = Time.time * 0.05f;
+        timeLeft -= Time.deltaTime;
 		//test.text = "Segregation " + (int) timeLeft;
         /* RIP ME HUHU*/
         if (moveToPlace) {
@@ -117,7 +136,7 @@ public class SegregationCheckerScript : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 {
 
-                    if (hit.collider.tag == "biocan") {
+                    if (hit.collider.gameObject.tag == "biocan") {
                         Sprite item = objects[0].GetComponent<SpriteRenderer>().sprite;
                         if (checkInSprites(bioSprites, item)) {
                             items--;
@@ -128,7 +147,7 @@ public class SegregationCheckerScript : MonoBehaviour {
                     }
                         
 
-                    if (hit.collider.tag == "nonbiocan")
+                    if (hit.collider.gameObject.tag == "nonbiocan")
                     {
                         Sprite item = objects[0].GetComponent<SpriteRenderer>().sprite;
                         if (checkInSprites(nonBioSprites, item))
