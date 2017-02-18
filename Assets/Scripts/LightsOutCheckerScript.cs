@@ -12,13 +12,13 @@ public class LightsOutCheckerScript : MonoBehaviour {
 	void Start () {
 		GameStats.Progress++;
 		GameStats.CurrentLevel = 3;
-		test = GameObject.Find("test").GetComponent<Text>();
+		//test = GameObject.Find("test").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		timeLeft -= Time.deltaTime;
-		test.text = "Lights Out: " + (int) timeLeft;
+		//test.text = "Lights Out: " + (int) timeLeft;
 
 		//pag di nagawa iyak
 		if (timeLeft < 0) {
