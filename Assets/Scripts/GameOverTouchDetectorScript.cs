@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GameOverTouchDetector : MonoBehaviour {
+public class GameOverTouchDetectorScript : MonoBehaviour {
 
 	Ray ray;
 	RaycastHit hit;
