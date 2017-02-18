@@ -1,18 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ProgressCheckerScript : MonoBehaviour {
 
+    Text score;
 	// Use this for initialization
 	void Start () {
-		if (GameStats.HasPassed) {
+        score = GameObject.Find("Score").GetComponent<Text>();
+        
+        if (GameStats.HasPassed) {
 			GameStats.Score += 100;
-		} else {
+            score.text = "" + GameStats.Score;
+        } else {
 			GameStats.Lives--;
-		}
+            if (GameStats.Lives < 3)
+                GameObject.FindGameObjectWithTag("life3").SetActive(false);
+            if (GameStats.Lives < 2)
+                GameObject.FindGameObjectWithTag("life2").SetActive(false);
+            if (GameStats.Lives < 1)
+                GameObject.FindGameObjectWithTag("life1").SetActive(false);
+        }
+        Debug.Log(GameStats.Lives);
 
-		if (GameStats.Lives == 0)
+		if (GameStats.Lives < 0)
 			SceneManager.LoadScene ("GameOverScreen", LoadSceneMode.Single);
 	}
 	

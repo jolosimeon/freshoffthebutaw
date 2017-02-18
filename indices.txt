@@ -1,0 +1,7 @@
+0 Home
+1 Progress
+2 GameOver
+3 LightsOut
+4 Run
+5 Seg
+6 Smoke
