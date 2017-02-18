@@ -23,6 +23,7 @@ public class ProgressCheckerScript : MonoBehaviour {
 			Debug.Log ("HLLOE");
 
 		if (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) {
+			GameStats.HasPassed = false;
 			System.Random rand = new System.Random ();
 			int nextLevel = GameStats.Levels [rand.Next (0, GameStats.Levels.Length)];
 			while (nextLevel == GameStats.CurrentLevel)

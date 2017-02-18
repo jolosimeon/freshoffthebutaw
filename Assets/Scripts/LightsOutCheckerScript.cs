@@ -27,8 +27,7 @@ public class LightsOutCheckerScript : MonoBehaviour {
 		}
 
 		//pag nagawa niya
-		if (timeLeft > 99999) {
-			GameStats.HasPassed = true;
+		if (GameStats.HasPassed) {
 			SceneManager.LoadScene ("ProgressScreen", LoadSceneMode.Single);
 		}
 
