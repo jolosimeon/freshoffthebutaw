@@ -17,11 +17,6 @@ public class SegregationCheckerScript : MonoBehaviour {
     Sprite[] nonBioSprites;
     Ray ray;
     RaycastHit hit;
-    public float barDisplay; //current progress
-    public Vector2 pos = new Vector2(20, 40);
-    public Vector2 size = new Vector2(21600, 100);
-    public Texture2D emptyTex;
-    public Texture2D fullTex;
 
 	Text timeText;
 
@@ -65,21 +60,7 @@ public class SegregationCheckerScript : MonoBehaviour {
 
 		timeText = GameObject.Find("Score").GetComponent<Text>();
 	}
-
-    void OnGUI()
-    {
-        //draw the background:
-        GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
-        GUI.Box(new Rect(0, 0, size.x, size.y), emptyTex);
-
-        //draw the filled-in part:
-        GUI.BeginGroup(new Rect(0, 0, size.x * barDisplay, size.y));
-        GUI.Box(new Rect(0, 0, size.x, size.y), fullTex);
-        GUI.EndGroup();
-        GUI.EndGroup();
-    }
-
-
+		
     /*for extensible in the future HAHAHAHA :((((((((((((((((((*/
     void moveObjects() {
         Vector3 vector = new Vector3((float) -2.48, 0, 0);
@@ -107,7 +88,7 @@ public class SegregationCheckerScript : MonoBehaviour {
 			timeLeft -= Time.deltaTime;
 		timeText.text = ""+(int)System.Math.Round(timeLeft,2);
 
-        barDisplay = Time.time * 0.05f;
+        
         timeLeft -= Time.deltaTime;
 		//test.text = "Segregation " + (int) timeLeft;
         /* RIP ME HUHU*/
