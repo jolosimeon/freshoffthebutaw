@@ -28,13 +28,11 @@ public class UnderwaterTrashController : MonoBehaviour {
 		transform.GetComponent<SpriteRenderer> ().sprite = sprites [num];
 
 			//rand = new System.Random ();
-		float numX = (float)GetRandomNumber(4.0, 6.0);
+		float numX = (float)GetRandomNumber(4.0, 7.5);
 			//rand = new System.Random ();
 		float numY = (float)GetRandomNumber(-1.9, 3.06);
 			transform.position = new Vector3(numX, numY, 0.0f);
 		//}
-
-		Debug.Log ("KANTOT: " + numX + numY);
 		
 	}
 	

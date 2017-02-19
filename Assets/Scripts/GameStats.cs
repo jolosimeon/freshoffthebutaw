@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class GameStats {
 
-	private static int lastComplete, progress, currentLevel, lives, score;
+	private static int lastComplete, progress, currentLevel, lives, score, healthState;
 	private static bool hasPassed;
 	private static int[] levels = { 3, 4, 5, 6 };
     private static string[] bio = { "apple", "banana" };
@@ -117,4 +117,16 @@ public static class GameStats {
             nonbio = value;
         }
     }
+
+	public static int HealthState 
+	{
+		get 
+		{
+			return healthState;
+		}
+		set 
+		{
+			healthState = value;
+		}
+	}
 }

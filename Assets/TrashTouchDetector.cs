@@ -24,7 +24,7 @@ public class TrashTouchDetector : MonoBehaviour {
 
 				// create and if collided with something
 				if (Physics.Raycast (ray, out hitObject, Mathf.Infinity)) {
-					GameObject hitGameObject = hitObject.transform.gameObject;
+					GameObject hitGameObject = hitObject.collider.gameObject;
 
 					numOfHitTrash++;
 
@@ -38,6 +38,9 @@ public class TrashTouchDetector : MonoBehaviour {
 					Debug.Log ("HIT BAYBEH!");
 				}
 			}
+		}
+		if (numOfHitTrash == 3) {
+			GameStats.HasPassed = true;
 		}
 
 	}

@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SegregationCheckerScript : MonoBehaviour {
 
-	float timeLeft = 10.0f;
+
+	float timeLeft = 5.0f;
+	float timeTotal = 5.0f;
     bool moveToPlace = false;
     int items = 4;
 	public Text test;
@@ -17,9 +19,11 @@ public class SegregationCheckerScript : MonoBehaviour {
     RaycastHit hit;
     public float barDisplay; //current progress
     public Vector2 pos = new Vector2(20, 40);
-    public Vector2 size = new Vector2(60, 20);
+    public Vector2 size = new Vector2(21600, 100);
     public Texture2D emptyTex;
     public Texture2D fullTex;
+
+	Text timeText;
 
     // Use this for initialization
     void Start () {
@@ -58,7 +62,9 @@ public class SegregationCheckerScript : MonoBehaviour {
 
         num = rand.Next(0, sprites.Length);
         objects[2].GetComponent<SpriteRenderer>().sprite = sprites[num];
-    }
+
+		timeText = GameObject.Find("Score").GetComponent<Text>();
+	}
 
     void OnGUI()
     {
@@ -95,6 +101,12 @@ public class SegregationCheckerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (timeLeft - Time.deltaTime < 0)
+			timeLeft = 0;
+		else
+			timeLeft -= Time.deltaTime;
+		timeText.text = ""+(int)System.Math.Round(timeLeft,2);
+
         barDisplay = Time.time * 0.05f;
         timeLeft -= Time.deltaTime;
 		//test.text = "Segregation " + (int) timeLeft;
@@ -104,7 +116,7 @@ public class SegregationCheckerScript : MonoBehaviour {
             objects[0].transform.Translate(vector);
             if (items > 1)
                 objects[1].transform.Translate(vector);
-            if (objects[0].transform.position.x == -0.04) {
+            if (objects[0].transform.position.x <= 0.25) {
                 moveToPlace = false;
                 if (items > 2)
                     objects[2].SetActive(true);
@@ -114,7 +126,7 @@ public class SegregationCheckerScript : MonoBehaviour {
         }
 
 		//pag di nagawa iyak
-		if (timeLeft < 0) {
+		if (timeLeft == 0) {
 			GameStats.HasPassed = false;
 			SceneManager.LoadScene ("ProgressScreen", LoadSceneMode.Single);
 		}

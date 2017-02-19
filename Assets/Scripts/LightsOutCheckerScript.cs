@@ -6,22 +6,25 @@ using UnityEngine.SceneManagement;
 public class LightsOutCheckerScript : MonoBehaviour {
 
 	float timeLeft = 5.0f;
-	public Text test;
+	public Text timeText;
 
 	// Use this for initialization
 	void Start () {
 		GameStats.Progress++;
 		GameStats.CurrentLevel = 3;
-		//test = GameObject.Find("test").GetComponent<Text>();
+		timeText = GameObject.Find("Score").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		timeLeft -= Time.deltaTime;
-		//test.text = "Lights Out: " + (int) timeLeft;
+		if (timeLeft - Time.deltaTime < 0)
+			timeLeft = 0;
+		else
+			timeLeft -= Time.deltaTime;
+		timeText.text = ""+(int)System.Math.Round(timeLeft,2);
 
 		//pag di nagawa iyak
-		if (timeLeft < 0) {
+		if (timeLeft == 0) {
 			GameStats.HasPassed = false;
 			SceneManager.LoadScene ("ProgressScreen", LoadSceneMode.Single);
 		}
