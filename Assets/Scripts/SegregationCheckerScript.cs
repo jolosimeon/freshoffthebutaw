@@ -89,7 +89,6 @@ public class SegregationCheckerScript : MonoBehaviour {
 		timeText.text = ""+(int)System.Math.Round(timeLeft,2);
 
         
-        timeLeft -= Time.deltaTime;
 		//test.text = "Segregation " + (int) timeLeft;
         /* RIP ME HUHU*/
         if (moveToPlace) {
